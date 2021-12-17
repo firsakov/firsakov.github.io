@@ -2,7 +2,7 @@
 <html>  
 <head>  
     <meta charset="utf-8" />  
-    <title>Create your perfect match</title>  
+    <title>My Slider</title>  
     <style type="text/css">  
         body {  
             margin: 0;  
@@ -14,25 +14,23 @@
             .showSlide img {  
                 width: 100%;  
             }  
-       .showSlide1 {  
+        .slidercontainer {  
+            width: 1000px;  
+            position: absolute;  
+            margin: auto;  
+        }  
+        .showSlide1 {  
             display: none  
         }  
             .showSlide1 img {  
                 width: 100%;  
             }  
-        .slidercontainer {  
+        .slidercontainer1 {  
             width: 1000px;  
-            position: absolute;  
-            left: 100px;
+            position: absolute;
+            top: 500px;
             margin: auto;  
         }  
-        .slidercontainer1 {
-            width: 1000px;
-            position: absolute;
-            left: 100px;
-            top: 300px;
-            margin: auto;
-        }
         .left, .right {  
             cursor: pointer;  
             position: absolute;  
@@ -52,7 +50,27 @@
         }  
             .left:hover, .right:hover {  
                 background-color: rgba(115, 115, 115, 0.8);  
-            }  
+            } 
+        .left1, .right1 {  
+            cursor: pointer;  
+            position: absolute;  
+            top: 50%;  
+            width: auto;  
+            padding: 16px;  
+            margin-top: -22px;  
+            color: white;  
+            font-weight: bold;  
+            font-size: 18px;  
+            transition: 0.6s ease;  
+            border-radius: 0 3px 3px 0;  
+        }  
+        .right1 {  
+            right1: 0;  
+            border-radius: 3px 0 0 3px;  
+        }  
+            .left1:hover, .right1:hover {  
+                background-color: rgba(115, 115, 115, 0.8);  
+            } 
         .content {  
             color: #eff5d4;  
             font-size: 30px;  
@@ -91,80 +109,78 @@
         }  
     </style>  
 </head>  
-<body>
+<body>  
     <div class="slidercontainer">  
         <div class="showSlide fade">  
             <img src="images/nose1fix.jpg" />  
+            <div class="content">Slide1 heading</div>  
         </div>  
         <div class="showSlide fade">  
             <img src="images/nose2fix.jpg" />  
-        </div>  
-  
-        <div class="showSlide fade">  
-            <img src="images/nose3fix.jpg" />  
-        </div>  
-        <div class="showSlide fade">  
-            <img src="images/nose4fix.jpg" />  
-        </div>  
+            <div class="content">Slide2 heading</div>  
+        </div>   
         <!-- Navigation arrows -->  
-        <a class="left" onclick="nextSlide(-1, 0)">❮</a>  
-        <a class="right" onclick="nextSlide(1, 0)">❯</a>  
+        <a class="left" onclick="nextSlide(-1)">❮</a>  
+        <a class="right" onclick="nextSlide(1)">❯</a>  
     </div>  
-    <div class="slidercontainer1">  
-        <div class="showSlide1 fade">  
+    <div class="slidercontainer2">  
+        <div class="showSlide fade">  
             <img src="images/nose1fix.jpg" />  
+            <div class="content">Slide1 heading</div>  
         </div>  
-        <div class="showSlide1 fade">  
+        <div class="showSlide fade">  
             <img src="images/nose2fix.jpg" />  
-        </div>  
-  
-        <div class="showSlide1 fade">  
-            <img src="images/nose3fix.jpg" />  
-        </div>  
-        <div class="showSlide1 fade">  
-            <img src="images/nose4fix.jpg" />  
-        </div>  
+            <div class="content">Slide2 heading</div>  
+        </div>   
         <!-- Navigation arrows -->  
-        <a class="left" onclick="nextSlide(-1, 1)">❮</a>  
-        <a class="right" onclick="nextSlide(1, 1)">❯</a>  
+        <a class="left1" onclick="nextSlide1(-1)">❮</a>  
+        <a class="right1" onclick="nextSlide1(1)">❯</a>  
     </div>  
   
     <script type="text/javascript">  
         var slide_index = 1;  
-        var slide_index1 = 1;
         displaySlides(slide_index);  
-        displaySlides(slide_index1);  
   
-        function nextSlide(n, si) {
-            switch(si) {
-                case 0: displaySlides(slide_index += n, slide_index);
-                case 1: displaySlides(slide_index1 += n, slide_index1);
-            } 
+        function nextSlide(n) {  
+            displaySlides(slide_index += n);  
         }  
   
-        function currentSlide(n, si) {  
-            switch(si) {
-                case 0: displaySlides(slide_index = n, slide_index);
-                case 1: displaySlides(slide_index1 = n, slide_index1);
-            }   
+        function currentSlide(n) {  
+            displaySlides(slide_index = n);  
         }  
   
-        function displaySlides(n, si) {  
+        function displaySlides(n) {  
             var i;  
-            var slides;
-            console.log(n,si);
-            switch(si) {
-                case 0: slides = document.getElementsByClassName("showSlide");  
-                case 1: slides = document.getElementsByClassName("showSlide1");  
-            }
-            if (n > slides.length) { si = 1 }  
-            if (n < 1) { si = slides.length }  
+            var slides = document.getElementsByClassName("showSlide");  
+            if (n > slides.length) { slide_index = 1 }  
+            if (n < 1) { slide_index = slides.length }  
             for (i = 0; i < slides.length; i++) {  
                 slides[i].style.display = "none";  
             }  
-            slides[si - 1].style.display = "block";  
+            slides[slide_index - 1].style.display = "block";  
+        }  
+        var slide_index1 = 1;  
+        displaySlides1(slide_index1);  
+  
+        function nextSlide1(n) {  
+            displaySlides1(slide_index1 += n);  
+        }  
+  
+        function currentSlide1(n) {  
+            displaySlides1(slide_index1 = n);  
+        }  
+  
+        function displaySlides1(n) {  
+            var i;  
+            var slides = document.getElementsByClassName("showSlide1");  
+            if (n > slides.length) { slide_index1 = 1 }  
+            if (n < 1) { slide_index1 = slides.length }  
+            for (i = 0; i < slides.length; i++) {  
+                slides[i].style.display = "none";  
+            }  
+            slides[slide_index1 - 1].style.display = "block";  
         }  
     </script>  
   
 </body>  
-</html>   
+</html> 
